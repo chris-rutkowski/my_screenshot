@@ -23,6 +23,9 @@ jobs:
         with:
           model: iPhone 14
 
+      - name: Flutter pub get
+        run: flutter pub get
+
       - name: Run integration tests
         run: flutter test integration_test/app_test.dart
 
