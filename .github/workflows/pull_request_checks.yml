@@ -31,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: snapshots_failures
-          path: integration_test/snapshots_failures/failures
+          path: integration_test
           retention-days: 14
