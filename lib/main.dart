@@ -7,8 +7,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(title: 'Counter App Home Page'),
+    return MaterialApp(
+      home: const MyHomePage(title: 'Counter App Home Page'),
+      theme: ThemeData.light().copyWith(
+        splashColor: Colors.yellow,
+        highlightColor: Colors.orange,
+      ),
     );
   }
 }

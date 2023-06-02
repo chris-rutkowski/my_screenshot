@@ -1,0 +1,38 @@
+name: Pull request checks
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  all:
+    runs-on: macos-13
+    timeout-minutes: 20
+    steps:
+      - name: Pull code
+        uses: actions/checkout@v3
+
+      - name: Pull Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.10.2
+          channel: stable
+
+      - name: Start iOS Simulator
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: iPhone 14
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Run integration tests
+        run: flutter test integration_test/app_test.dart
+
+      - name: Upload failed snapshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: snapshots_failures
+          path: integration_test
+          retention-days: 14
